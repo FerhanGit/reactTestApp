@@ -111,7 +111,7 @@ class App extends React.Component
         <div className="App">
           <button className="btn btn-success mt-5" onClick={this.handleAdd}>Add new item</button>
           <ul>
-            {this.state.counters.map((counter, index) => <ol style={{margin: '40px'}}><Counter index={index} key={counter.id} loadingTextStyle={this.loadingTextStyle} clickCount={counter.clickCount} handleIncrement={() => this.handleIncrement(counter.id)} handleDecrement={() => this.handleDecrement(counter.id)} handleRemove={() => this.handleRemove(counter.id)}/></ol>)}
+            {this.state.counters.map((counter, index) => <ol key={counter.id} style={{margin: '40px'}}><Counter index={index} key={counter.id} loadingTextStyle={this.loadingTextStyle} clickCount={counter.clickCount} handleIncrement={() => this.handleIncrement(counter.id)} handleDecrement={() => this.handleDecrement(counter.id)} handleRemove={() => this.handleRemove(counter.id)}/></ol>)}
           </ul>
         </div>
     );
