@@ -4,28 +4,9 @@ import './App.css';
 
 class App extends React.Component
 {
-  constructor() {
-    super()
-    this.state = {
-      counters: [
-        {
-          id: 1,
-          clickCount: 0
-        },
-        {
-          id: 2,
-          clickCount: 3
-        },
-        {
-          id: 3,
-          clickCount: 6
-        }
-      ]
-    }
-    this.handleAdd = this.handleAdd.bind(this)
-    this.handleRemove = this.handleRemove.bind(this)
-    this.handleIncrement = this.handleIncrement.bind(this)
-    this.handleDecrement = this.handleDecrement.bind(this)
+  constructor(props) {
+    super(props)
+    this.state = this.props.data
   }
 
   handleIncrement = (id) => {
@@ -43,7 +24,7 @@ class App extends React.Component
     })
   }
 
-  handleDecrement(id) {
+  handleDecrement = (id) => {
     this.setState(prevState => {
       const countersNew = prevState.counters.map(counter => {
         if(counter.id === id) {
@@ -65,7 +46,7 @@ class App extends React.Component
     return isFinite(nextId) ? nextId : 1;
   }
 
-  handleAdd() {
+  handleAdd = () => {
     const nextId = this.getNextId(this.state.counters)
     const newCounterts = this.state.counters;
     newCounterts.push({id: nextId, clickCount: 0});
