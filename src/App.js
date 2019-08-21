@@ -108,11 +108,13 @@ class App extends React.Component
 
   render() {
     return (
-        <div className="App">
-          <button className="btn btn-success mt-5" onClick={this.handleAdd}>Add new item</button>
-          <ul>
+        <div className="App d-flex justify-content-center">
+          <p>
+          <ul style={{margin:0}}>
             {this.state.counters.map((counter, index) => <ol key={counter.id} style={{margin: '40px'}}><Counter index={index} key={counter.id} loadingTextStyle={this.loadingTextStyle} clickCount={counter.clickCount} handleIncrement={() => this.handleIncrement(counter.id)} handleDecrement={() => this.handleDecrement(counter.id)} handleRemove={() => this.handleRemove(counter.id)}/></ol>)}
           </ul>
+          <button className="btn btn-success mt-5 m-x-0" onClick={this.handleAdd}>Add new item</button>
+          </p>
         </div>
     );
   }
