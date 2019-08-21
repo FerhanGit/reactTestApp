@@ -59,9 +59,10 @@ class App extends React.Component
   }
 
   getNextId = (obj) => {
-    return (Math.max.apply(Math, obj.map(function(o) {
+    const nextId = (Math.max.apply(Math, obj.map(function(o) {
       return o.id;
     })) + 1);
+    return isFinite(nextId) ? nextId : 1;
   }
 
   handleAdd() {
