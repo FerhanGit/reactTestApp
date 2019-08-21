@@ -13,7 +13,36 @@ class App extends React.Component
     this.setState(prevState => {
       const countersNew = prevState.counters.map(counter => {
         if(counter.id === id) {
-          counter.clickCount = counter.clickCount + 1
+          counter.clickCount = counter.clickCount + counter.incrementBy
+        }
+        return counter
+      })
+
+      return {
+        counters: countersNew
+      }
+    })
+  }
+  handleSetIncrementValue = (id) => {
+    this.setState(prevState => {
+      const countersNew = prevState.counters.map(counter => {
+        if(counter.id === id) {
+          counter.incrementBy = parseInt(document.getElementById('increment-'+id).value)
+        }
+        return counter
+      })
+
+      return {
+        counters: countersNew
+      }
+    })
+  }
+
+  handleSetDecrementValue = (id) => {
+    this.setState(prevState => {
+      const countersNew = prevState.counters.map(counter => {
+        if(counter.id === id) {
+          counter.decrementBy = parseInt(document.getElementById('decrement-'+id).value)
         }
         return counter
       })
@@ -28,7 +57,7 @@ class App extends React.Component
     this.setState(prevState => {
       const countersNew = prevState.counters.map(counter => {
         if(counter.id === id) {
-          counter.clickCount = counter.clickCount - 1
+          counter.clickCount = counter.clickCount - counter.decrementBy
         }
         return counter
       })
@@ -49,7 +78,7 @@ class App extends React.Component
   handleAdd = () => {
     const nextId = this.getNextId(this.state.counters)
     const newCounterts = this.state.counters;
-    newCounterts.push({id: nextId, clickCount: 0});
+    newCounterts.push({id: nextId, clickCount: 0, incrementBy: 1, decrementBy: 1});
     this.setState({counters: newCounterts})
   }
 
@@ -90,12 +119,24 @@ class App extends React.Component
   render() {
     return (
         <div className="App d-flex justify-content-center">
-          <p>
+          <div>
           <ul style={{margin:0}}>
-            {this.state.counters.map((counter, index) => <ol key={counter.id} style={{margin: '40px'}}><Counter index={index} key={counter.id} loadingTextStyle={this.loadingTextStyle} clickCount={counter.clickCount} handleIncrement={() => this.handleIncrement(counter.id)} handleDecrement={() => this.handleDecrement(counter.id)} handleRemove={() => this.handleRemove(counter.id)}/></ol>)}
+            {this.state.counters.map((counter, index) => <ol key={counter.id} style={{margin: '40px'}}>
+              <Counter
+                  index={index}
+                  counter={counter}
+                  key={counter.id}
+                  loadingTextStyle={this.loadingTextStyle}
+                  handleIncrement={() => this.handleIncrement(counter.id)}
+                  handleDecrement={() => this.handleDecrement(counter.id)}
+                  handleRemove={() => this.handleRemove(counter.id)}
+                  handleSetIncrementValue={() => this.handleSetIncrementValue(counter.id)}
+                  handleSetDecrementValue={() => this.handleSetDecrementValue(counter.id)}
+              />
+            </ol>)}
           </ul>
           <button className="btn btn-success mt-5 m-x-0" onClick={this.handleAdd}>Add new item</button>
-          </p>
+          </div>
         </div>
     );
   }

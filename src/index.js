@@ -9,15 +9,21 @@ const data = {
     counters : [
         {
             id: 1,
-            clickCount: 0
+            clickCount: 0,
+            incrementBy: 1,
+            decrementBy: 1
         },
         {
             id: 2,
-            clickCount: 3
+            clickCount: 3,
+            incrementBy: 1,
+            decrementBy: 1
         },
         {
             id: 3,
-            clickCount: 6
+            clickCount: 6,
+            incrementBy: 1,
+            decrementBy: 1
         }
     ]
 }
